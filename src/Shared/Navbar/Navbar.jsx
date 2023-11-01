@@ -16,7 +16,10 @@ const Navbar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/about'>About</NavLink></li>
         <li><NavLink to='/services'>Services</NavLink></li>
-        {user?.email ? <li><button onClick={handleLogOut}>LogOut</button></li> :
+        {user?.email ? <>
+            <li><NavLink to='/bookings'>My Bookings</NavLink></li>
+            <li><button onClick={handleLogOut}>LogOut</button></li>
+        </> :
             <li><NavLink to='/login'>Login</NavLink></li>
 
         }
