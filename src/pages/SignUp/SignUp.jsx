@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 
 const SignUp = () => {
-    const { createUser } = useContext(AuthContext)
+    const { createUser } = useContext(AuthContext);
 
     const handleSignIn = (e) => {
         e.preventDefault();
