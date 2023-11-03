@@ -22,7 +22,7 @@ const Login = () => {
                 const user = { email };
                 // navigate(location?.state ? location?.state : '/');
 
-                axios.post('http://localhost:5000/jwt', user, {
+                axios.post('https://car-doctor-server-pf1uorald-abdur-rahmans-projects.vercel.app/jwt', user, {
                     withCredentials: true
                 })
                     .then(res => {
