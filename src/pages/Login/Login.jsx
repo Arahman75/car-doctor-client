@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
 import login from '../../assets/images/login/login.svg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Provider/AuthProvider';
+// import { AuthContext } from '../../Provider/AuthProvider';
 import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
-    const { signIn } = useContext(AuthContext);
+    // const { signIn } = useContext(AuthContext);
+    const { signIn } = useAuth()
+
     const location = useLocation();
     const navigate = useNavigate();
     const handleLogin = (e) => {
@@ -22,7 +25,7 @@ const Login = () => {
                 const user = { email };
                 // navigate(location?.state ? location?.state : '/');
 
-                axios.post('https://car-doctor-server-pf1uorald-abdur-rahmans-projects.vercel.app/jwt', user, {
+                axios.post('http://localhost:5000/jwt', user, {
                     withCredentials: true
                 })
                     .then(res => {

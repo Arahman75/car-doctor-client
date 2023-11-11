@@ -2,27 +2,40 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import BookingRow from './BookingRow';
 import axios from 'axios';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Bookings = () => {
     const { user } = useContext(AuthContext);
-    const [bookings, setBookings] = useState([])
+    const [bookings, setBookings] = useState([]);
+    const axiosSecure = useAxiosSecure();
 
-    const url = `https://car-doctor-server-pf1uorald-abdur-rahmans-projects.vercel.app/bookings?email=${user?.email}`;
+    // first step
+
+    // const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    // useEffect(() => {
+    //     axios.get(url, { withCredentials: true })
+    //         .then(res => {
+    //             setBookings(res.data)
+    //         })
+    //     // fetch(url)
+    //     //     .then(res => res.json())
+    //     //     .then(data => setBookings(data)
+    //     //     )
+    // }, [url]);
+
+    // second step 
+
+    const url = `bookings?email=${user?.email}`;
+
     useEffect(() => {
-        axios.get(url, { withCredentials: true })
-            .then(res => {
-                setBookings(res.data)
-            })
-        // fetch(url)
-        //     .then(res => res.json())
-        //     .then(data => setBookings(data)
-        //     )
-    }, [url]);
+        axiosSecure.get(url)
+            .then(res => setBookings(res.data))
+    }, [url, axiosSecure]);
 
     const handleDelete = (id) => {
         const proceed = confirm('Are you sure you want to delete');
         if (proceed) {
-            fetch(`https://car-doctor-server-pf1uorald-abdur-rahmans-projects.vercel.app/bookings/${id}`, {
+            fetch(`http://localhost:5000/bookings/${id}`, {
                 method: 'DELETE',
             })
                 .then(res => res.json())
@@ -38,7 +51,7 @@ const Bookings = () => {
     }
 
     const handleBookingConfirm = (id) => {
-        fetch(`https://car-doctor-server-pf1uorald-abdur-rahmans-projects.vercel.app/bookings/${id}`, {
+        fetch(`http://localhost:5000/bookings/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
